@@ -1,0 +1,56 @@
+{
+    "version": 3,
+    "configurePresets": [
+      {
+        "name": "base",
+        "displayName": "Basic Config",
+        "description": "Basic build using Ninja generator",
+        "generator": "Ninja",
+        "hidden": true,
+        "binaryDir": "${sourceDir}/out/build/${presetName}",
+        "cacheVariables": { 
+          "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+         }
+      },
+  
+      {
+        "name": "x64",
+        "architecture": {
+          "value": "x64",
+          "strategy": "external"
+        },
+        "hidden": true
+      },
+      {
+        "name": "x86",
+        "architecture": {
+          "value": "x86",
+          "strategy": "external"
+        },
+        "hidden": true
+      },
+      {
+        "name": "Debug",
+        "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" },
+        "hidden": true
+      },
+      {
+        "name": "Release",
+        "cacheVariables": { "CMAKE_BUILD_TYPE": "RelWithDebInfo" },
+        "hidden": true
+      },  
+      {
+        "name": "MSVC",
+        "hidden": true,
+        "cacheVariables": {
+          "CMAKE_CXX_COMPILER": "cl.exe",
+          "CMAKE_C_COMPILER" : "cl.exe"
+        }
+      },
+  
+      { "name": "x64-Debug"    , "description": "MSVC for x64 (Debug) for Windows", "inherits": [ "base", "x64", "Debug", "MSVC" ] },
+      { "name": "x64-Release"  , "description": "MSVC for x64 (Release) for Windows", "inherits": [ "base", "x64", "Release", "MSVC" ] },
+      { "name": "x86-Debug"    , "description": "MSVC for x86 (Debug) for Windows", "inherits": [ "base", "x86", "Debug", "MSVC" ] },
+      { "name": "x86-Release"  , "description": "MSVC for x86 (Release) for Windows", "inherits": [ "base", "x86", "Release", "MSVC" ] }
+    ]
+}
