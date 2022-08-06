@@ -35,7 +35,7 @@
         "hidden": true
       },
       {
-        "name": "Release",
+        "name": "RelWithDebInfo",
         "cacheVariables": { "CMAKE_BUILD_TYPE": "RelWithDebInfo" },
         "hidden": true
       },  
@@ -49,8 +49,8 @@
       },
   
       { "name": "x64-Debug"    , "description": "MSVC for x64 (Debug) for Windows", "inherits": [ "base", "x64", "Debug", "MSVC" ] },
-      { "name": "x64-Release"  , "description": "MSVC for x64 (Release) for Windows", "inherits": [ "base", "x64", "Release", "MSVC" ] },
+      { "name": "x64-RelWithDebInfo"  , "description": "MSVC for x64 (Release) for Windows", "inherits": [ "base", "x64", "RelWithDebInfo", "MSVC" ] },
       { "name": "x86-Debug"    , "description": "MSVC for x86 (Debug) for Windows", "inherits": [ "base", "x86", "Debug", "MSVC" ] },
-      { "name": "x86-Release"  , "description": "MSVC for x86 (Release) for Windows", "inherits": [ "base", "x86", "Release", "MSVC" ] }
+      { "name": "x86-RelWithDebInfo"  , "description": "MSVC for x86 (Release) for Windows", "inherits": [ "base", "x86", "RelWithDebInfo", "MSVC" ] }
     ]
 }

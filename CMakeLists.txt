@@ -10,6 +10,7 @@ message(FATAL_ERROR "Can't find conan executable!")
 endif()
 
 set(CONAN_FILES_OUTPUT_DIR "${CMAKE_SOURCE_DIR}/.conan")
+# Clean old conan ouptut files first
 execute_process(COMMAND "${CMAKE_COMMAND}" -E remove_directory "${CONAN_FILES_OUTPUT_DIR}")
 execute_process(COMMAND "${CMAKE_COMMAND}" -E make_directory "${CONAN_FILES_OUTPUT_DIR}")
 
