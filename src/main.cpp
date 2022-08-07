@@ -11,7 +11,7 @@ GLuint CompileShader(GLenum aShaderType, const char* aShaderPath)
 	switch (aShaderType)
 	{
 	case GL_VERTEX_SHADER:
-		[[fallthrough]]
+		[[fallthrough]];
 	case GL_FRAGMENT_SHADER:
 		break;
 	default: assert(false && "Unsupported shader type");
@@ -75,10 +75,16 @@ int main() {
 	 0.0f,  0.5f, 0.0f
 	};
 
-	GLuint vertexBuffer;
+	GLuint vertexBuffer, vertexArray;
 	glGenBuffers(1, &vertexBuffer);
+	glGenVertexArrays(1, &vertexArray);
+	glBindVertexArray(vertexArray);
+	
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
 
 	GLuint vertexShader = CompileShader(GL_VERTEX_SHADER, "shader/vertex.shader");
 	GLuint fragmentShader = CompileShader(GL_FRAGMENT_SHADER, "shader/fragment.shader");
@@ -89,20 +95,20 @@ int main() {
 	glLinkProgram(shaderProgram);
 	glUseProgram(shaderProgram);
 
-	glDeleteProgram(vertexShader);
-	glDeleteProgram(fragmentShader);
-
-
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
 
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
 		ProcessInput(window);
 
-		glfwPollEvents();
 		glfwSwapBuffers(window);
+		glfwPollEvents();
 	}
 
 	glfwTerminate();
