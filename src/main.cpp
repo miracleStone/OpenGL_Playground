@@ -17,14 +17,25 @@ GLuint CompileShader(GLenum aShaderType, const char* aShaderPath)
 	default: assert(false && "Unsupported shader type");
 	}
 
-	std::stringstream shaderFile;
-	shaderFile << std::ifstream(aShaderPath).rdbuf();
-	std::string shaderStr = shaderFile.str();
+	std::ifstream shaderFile(aShaderPath);
+
+	assert(shaderFile.is_open() && "File not exsist");
+	std::stringstream codeText;
+	codeText << std::ifstream(aShaderPath).rdbuf();
+	std::string shaderStr = codeText.str();
 	const char* shaderSrc = shaderStr.c_str();
 
 	GLuint shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(shader, 1, &shaderSrc, nullptr);
 	glCompileShader(shader);
+	
+	GLint success;
+	char infoLog[512];
+	glGetProgramiv(shader, GL_LINK_STATUS, &success);
+	if (!success) {
+		glGetProgramInfoLog(shader, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+	}
 
 	return shader;
 }
@@ -86,8 +97,8 @@ int main() {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	GLuint vertexShader = CompileShader(GL_VERTEX_SHADER, "shader/vertex.shader");
-	GLuint fragmentShader = CompileShader(GL_FRAGMENT_SHADER, "shader/fragment.shader");
+	GLuint vertexShader = CompileShader(GL_VERTEX_SHADER, "./shader/vertex.shader");
+	GLuint fragmentShader = CompileShader(GL_FRAGMENT_SHADER, "./shader/fragment.shader");
 
 	GLuint shaderProgram = glCreateProgram();
 	glAttachShader(shaderProgram, vertexShader);
