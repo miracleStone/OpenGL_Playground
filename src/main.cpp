@@ -28,7 +28,7 @@ GLuint CompileShader(GLenum aShaderType, const char* aShaderPath)
 	GLuint shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(shader, 1, &shaderSrc, nullptr);
 	glCompileShader(shader);
-	
+
 	GLint success;
 	char infoLog[512];
 	glGetProgramiv(shader, GL_LINK_STATUS, &success);
@@ -90,7 +90,7 @@ int main() {
 	glGenBuffers(1, &vertexBuffer);
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);
-	
+
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 

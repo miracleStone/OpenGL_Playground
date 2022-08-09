@@ -33,7 +33,7 @@ target_include_directories(${PROJECT_NAME}
         "${CMAKE_SOURCE_DIR}/include"
         
     PRIVATE
-        "${CMAKE_SOURCE_DIR}/src"
+        "${CMAKE_SOURCE_DIR}/src"        
         )
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw::glfw glad::glad)
 
@@ -43,3 +43,10 @@ target_sources(${PROJECT_NAME}
     PRIVATE
         "src/main.cpp"
 )
+
+add_custom_target(copy_shader_files ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    "${CMAKE_SOURCE_DIR}/src/shader"
+    "${CMAKE_BINARY_DIR}/shader"
+)
+
