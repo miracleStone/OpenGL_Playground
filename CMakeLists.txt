@@ -41,8 +41,12 @@ target_sources(${PROJECT_NAME}
     PUBLIC
 
     PRIVATE
+        "include/stb_image.h"
+        "include/utils.h"
         "src/main.cpp"
-)
+        "src/stb_image.cpp"
+        "src/HelloTriangles/HelloTriangles.h"
+        "src/HelloTriangles/HelloTriangles.cpp" "src/utils.cpp")
 
 add_custom_target(copy_shader_files ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory

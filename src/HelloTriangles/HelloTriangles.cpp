@@ -1,8 +1,9 @@
-#include "utils.h"
-#include "HelloTriangles/HelloTriangles.h"
-#include "stb_image.h"
+#include "HelloTriangles.h"
 
-int main() {
+#include "utils.h"
+
+int HelloTriangles()
+{
 	glfwInit();
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -72,18 +73,6 @@ int main() {
 
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
-
-	int texWidth, texHeight, texChannelNumbers;
-	auto texData = stbi_load("./assets/texture/container.jpg", &texWidth, &texHeight, &texChannelNumbers, 0);
-	assert(texData != nullptr && "Failed to load texture.");
-
-	GLuint texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, texData);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	stbi_image_free(texData);
 
 	while (!glfwWindowShouldClose(window))
 	{
