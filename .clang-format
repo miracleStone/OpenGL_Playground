@@ -1,0 +1,42 @@
+# See following document for information about .clang-format
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+
+---
+    Language: Cpp
+    BasedOnStyle: Mozilla
+
+    ColumnLimit: 100
+    AccessModifierOffset: -4
+    AlwaysBreakAfterReturnType: TopLevelDefinitions
+    ConstructorInitializerIndentWidth: 4
+    ContinuationIndentWidth: 4
+    IndentWidth: 4
+    UseCRLF: false
+    IndentCaseLabels: false
+
+    FixNamespaceComments: true
+    BreakBeforeBraces: Allman
+    Standard: c++20
+
+    SpaceAfterTemplateKeyword: true
+
+    IncludeBlocks: Regroup
+    IncludeCategories:
+        - Regex: '^<[^.]+>'
+          Priority: 30
+        - Regex: '^<.+>'
+          Priority: 20
+        - Regex: '^".+"'
+          Priority: 10
+    IncludeIsMainRegex: ''
+    SortIncludes: true
+    SortUsingDeclarations: true
+---
+    Language: Proto
+    BasedOnStyle: Mozilla
+
+    ColumnLimit: 100
+    ContinuationIndentWidth: 4
+    IndentWidth: 4
+    UseCRLF: false
+...
